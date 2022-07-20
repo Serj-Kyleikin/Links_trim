@@ -27,22 +27,26 @@ if(count($_POST) == 4) {
     $files = require_once $path . 'admin/configuration/files.php';
 
     foreach($files as $type) {
-        foreach($type as $file => $data) {
+        foreach($type as $access => $file_t) {
+            foreach($file_t as $file => $data) {
 
-            if($file == 'configurations/connection.php') {     // Создание дескриптора подключения
-    
-                $data = "<?php
-    
-                return [
-                    'host' => '{$_POST['host']}',
-                    'db_name' => '{$_POST['base']}',
-                    'password' => '{$_POST['password']}',
-                    'user' => '{$_POST['login']}'
-                ];";
+                if($file == 'configurations/connection.php') {     // Создание дескриптора подключения
+
+                    $data = "<?php
+
+                    return [
+                        'host' => '{$_POST['host']}',
+                        'db_name' => '{$_POST['base']}',
+                        'password' => '{$_POST['password']}',
+                        'user' => '{$_POST['login']}'
+                    ];";
+
+                } elseif($file == '.htaccess') $data = require_once $path . 'admin/configuration/apache.php';
+
+                $file = $path . $file;
+                if(!is_file($file)) file_put_contents($file, $data);
+                chmod($file, base_convert($access, 8, 10));
             }
-    
-            $file = $path . $file;
-            if(!is_file($file)) file_put_contents($file, $data);
         }
     }
 

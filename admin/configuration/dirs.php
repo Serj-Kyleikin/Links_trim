@@ -2,12 +2,12 @@
 
 return [
     'core' =>  [
-        '0777' => [
+        '0740' => [
             'configurations'
         ]
     ],
     'plugins' =>  [
-        '0777' => [
+        '0740' => [
             'logs'
         ]
     ]

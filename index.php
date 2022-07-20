@@ -7,7 +7,7 @@ session_start();
 ini_set('display_errors', 1);       // 0 - публичное размещение. 1 - отладка.
 error_reporting(E_ALL);
 
-define('A_MODE', 1);                // Режим администратора
+define('A_MODE', 0);                // Режим администратора
 
 if(A_MODE) require_once $_SERVER['DOCUMENT_ROOT'] . '/libraries/Admin.php';
 
