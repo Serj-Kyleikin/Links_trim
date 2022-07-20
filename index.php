@@ -4,7 +4,7 @@ session_start();
 
 // Настройки администратора
 
-ini_set('display_errors', 1);       // 0 - публичное размещение. 1 - отладка.
+ini_set('display_errors', 0);       // 0 - публичное размещение. 1 - отладка.
 error_reporting(E_ALL);
 
 define('A_MODE', 0);                // Режим администратора
