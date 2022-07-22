@@ -6,7 +6,7 @@ function checkUrl(url) {
     let URI = {
         main_scheme: '(https?:\/\/)?',
         domain: '([а-яa-z0-9-_\.\/]+)+',
-        zone: '[а-яa-z]{2,}',
+        zone: '[\.][а-яa-z]{2,}',
         port: '([:][0-9]{1,4})?',
         path: '([а-яa-z0-9-_\.\/]+)?',
         query: '([a-z0-9\.\+-_=&%]+)?',
@@ -46,11 +46,8 @@ async function getURL() {
 
         let data = await getLink.text();
 
-        if(data == 'infected') {
-            showMessage(errorText, 'Ссылка не безопасна!');
-        } else if(data == 'error') {
-            showMessage(errorText, 'Сервис временно не доступен!');
-        } else {
+        if(data.match(/\d/)) showMessage(errorText, data);
+        else {
 
             let show = document.getElementById('show');
             show.classList.add('active');
@@ -72,23 +69,28 @@ async function getURL() {
         }
 
     } else {
-        showMessage(errorText, 'Используйте корректный URL!');
+        showMessage(errorText, 2);
     }
 }
 
 // Сообщение с ошибкой
 
-function showMessage(errorText, message) {
+function showMessage(errorText, code) {
 
-    if(errorText) {
-        errorText.textContent = message;
-    } else {
+    let codes = {
+        0: 'Ссылка не безопасна!',
+        1: 'Сервис временно не доступен!',
+        2: 'Используйте корректный URL!'
+    };
+
+    if(errorText) errorText.textContent = codes[code];
+    else {
 
         let error = document.getElementById('error');
         let P = document.createElement("p");
         error.appendChild(P);
 
-        P.classList.add('ErrorText');
-        P.textContent = message;
+        P.className = 'ErrorText';
+        P.textContent = codes[code];
     }
 }
