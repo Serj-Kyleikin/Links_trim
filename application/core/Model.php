@@ -88,10 +88,10 @@ class Model {
 			else $this->saveURL($check['link']);
 
 		} elseif($checkURI == 'infected') {
-			echo "infected";
+			echo 0;
 		} else {
 			$this->log->write('api_errors.txt', 'Статус ответа: ' . $checkURI);
-			echo "error";
+			echo 1;
 		}
 	}
 
