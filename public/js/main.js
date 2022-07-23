@@ -46,7 +46,7 @@ async function getURL() {
 
         let data = await getLink.text();
 
-        if(data.match(/\d/)) showMessage(errorText, data);
+        if(data.match(/^\d{1}$/)) showMessage(errorText, data);
         else {
 
             let show = document.getElementById('show');
